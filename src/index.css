@@ -6,8 +6,9 @@
   --color-secondary: #d81b7e; /* deep pink - secondary emphasis */
   --color-accent: #ec4899; /* pink-500, highlights */
   --color-foreground: #7c3aed; /* violet-600, pairs with the pink for contrast */
-  --color-violet-light: #8b5cf6; /* lighter violet, soft-gradient partner */
-  --color-orange: #ff5722; /* gradient start */
+  --color-violet-light: #8b5cf6; /* violet-500, soft-gradient partner */
+  --color-orange: #ff5722; /* orange-600 */
+  --color-orange-light: #f97316; /* orange-500 */
 
   /* Text Colors
     Generate text-* utilities */
@@ -28,9 +29,13 @@
   /* Generate Shadow */
   --shadow-pink-glow: 0 1px 2px 0 var(--color-text-pink);
   --shadow-brand-soft: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-dropdown-soft: 0 8px 32px -12px rgba(15, 23, 42, 0.15);
+  --shadow-pink-glow-hover: 0 8px 24px -8px rgba(219, 39, 119, 0.35);
+  --shadow-pink-glow-light-hover: 0 12px 28px -8px rgba(236, 72, 153, 0.5);
 
   /* Typography */
   --font-jakarta: "Plus Jakarta Sans", sans-serif;
+  --font-inter: "Inter", sans-serif;
 
   /* Generate Gradient Color - Obviously add --background-image-, without this not work  */
   --background-image-gradient-brand: linear-gradient(
@@ -54,6 +59,19 @@ body {
   background-color: #ffffff;
   background-image: none;
 }
+
+/* .hero-text-gradient,
+.technology-text-gradient {
+  @apply bg-clip-text text-transparent;
+}
+
+.hero-text-gradient {
+  @apply bg-linear-to-r from-orange via-secondary to-foreground;
+}
+
+.technology-text-gradient {
+  @apply bg-linear-to-r from-accent to-violet-light;
+} */
 
 /* #root {
   max-width: 1280px;

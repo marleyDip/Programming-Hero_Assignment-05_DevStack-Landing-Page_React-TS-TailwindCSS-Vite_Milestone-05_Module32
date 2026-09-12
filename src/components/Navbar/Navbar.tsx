@@ -20,9 +20,17 @@ const Navbar = () => {
   };
 
   return (
+    /* custom "shadow-[0_8px_32px_-12px] shadow-slate-900/15"
+
+    shadow-[0_8px_32px_-12px] => (x, y, blur, spread)
+
+    shadow-slate-900/15 => rgb(15 23 42) base color at 15% opacity = 15 percentage opaque (visible) and 85 percentage transparent (invisible) 
+    
+    */
+
     <header
       id="top"
-      className="sticky top-0 z-50 border md:border-b border-border-subtle bg-[#fbfbfc] md:bg-[#ffffff] backdrop-blur-md m-1 md:m-0"
+      className="sticky top-0 z-50 border md:border-b border-border-subtle bg-[#fbfbfc]/60 md:bg-[#ffffff]/60 backdrop-blur-xl backdrop-saturate-150 shadow-dropdown-soft m-1 md:m-0"
     >
       <div className="mx-auto max-w-7xl font-jakarta flex items-center justify-between gap-4 px-4 py-2 sm:px-6 sm:py-4 md:px-8 md:py-6">
         {/* Mobile Hamburger */}
