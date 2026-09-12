@@ -5,3 +5,11 @@ export const navbarLinks: { name: string; href: string }[] = [
   { name: "About", href: "#about" },
   { name: "Contact", href: "#contact" },
 ];
+
+export const NAV_LINKS: string[] = [
+  "Home",
+  "Technologies",
+  "Projects",
+  "About",
+  "Contact",
+];

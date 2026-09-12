@@ -1,0 +1,274 @@
+@import "tailwindcss";
+
+@theme {
+  /* Generates Colors for background, text, border */
+  --color-primary: #db2777; /* pink-600 - primary actions, links */
+  --color-secondary: #d81b7e; /* deep pink - secondary emphasis */
+  --color-accent: #ec4899; /* pink-500, highlights */
+  --color-foreground: #7c3aed; /* violet, pairs with the pink for contrast */
+  --color-violet-light: #8b5cf6; /* lighter violet, soft-gradient partner */
+  --color-orange: #ff5722; /* gradient start */
+
+  /* Text Colors
+    Generate text-* utilities */
+  --color-text-heading: #0f172a; /* slate-900 */
+  --color-text-body: #334155; /* slate-700 */
+  --color-text-secondary: #475569; /* slate-600 */
+  --color-text-muted: #64748b; /* slate-500 */
+  --color-text-faint: #94a3b8; /* slate-400 */
+  --color-text-danger: #d82c20;
+
+  /* UI Colors */
+  --color-button: #d91b7e; /* deep pink - Auth button */
+  --color-surface-button: #0a0f1d;
+  --color-border-subtle: #f1f5f9;
+  --color-border-danger: #ed8c85;
+
+  /* Typography */
+  --font-jakarta: "Plus Jakarta Sans", sans-serif;
+
+  /* Generate Gradient Color */
+  /* --gradient-text: linear-gradient(
+    to right,
+    var(--color-orange) 0%,
+    var(--color-secondary) 50%,
+    var(--color-foreground) 100%
+  ); */
+
+  /* --gradient-text: linear-gradient(
+    to right,
+    var(--color-orange),
+    var(--color-pink-500),
+    var(--color-violet-500)
+  ); */
+}
+
+/* @utility text-gradient {
+  background: var(--gradient-text);
+
+  background: linear-gradient(to right, #ff5722 0%, #d81b7e 50%, #7c3aed 100%);
+
+  background: linear-gradient(
+    to right,
+    var(--color-orange) 0%,
+    (--color-secondary) 50%,
+    (--color-foreground) 100%
+  );
+
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+} */
+
+/* @utility utility-name {
+    CSS properties or @apply directives go here
+} */
+
+@utility hero-text-gradient {
+  @apply bg-linear-to-r from-orange via-secondary to-foreground bg-clip-text text-transparent;
+}
+
+/* @utility hero-text-gradient {
+  @apply bg-linear-to-r from-orange via-pink-500 to-violet-500 bg-clip-text text-transparent;
+} */
+
+@utility technology-text-gradient {
+  @apply bg-linear-to-r from-accent to-violet-light bg-clip-text text-transparent;
+}
+
+root: {
+  --gradient-brand: --all-color: #ffffff;
+}
+
+/* for text: 
+linear-gradient color: 0% #ff5722 100%, 50% #d81b7e 100%, 100% #7c3aed 100%
+
+linear-gradient color: 0% #ec4899 100%, 100% #8b5cf6 100%  */
+
+/* Tailwind CSS v4-এ পুরোনো @layer utilities এবং @layer components নির্দেশিকাগুলো আর ব্যবহার করা হয় না। 
+
+v4 সংস্করণে কাস্টম ক্লাস তৈরি করার জন্য পুরোনো @layer সিস্টেমের পরিবর্তে সম্পূর্ণ নতুন @utility ডিরেক্টিভ নিয়ে আসা হয়েছে। 
+
+❌ পুরোনো পদ্ধতি (Tailwind v3 - যা v4-এ কাজ করবে না)
+
+// v3 এর এই কোডটি v4-এ বাদ দেওয়া হয়েছে
+@layer utilities {
+  .hero-text-gradient {
+    @apply bg-gradient-to-r from-orange-500 to-pink-500 bg-clip-text text-transparent;
+  }
+}
+
+নতুন সঠিক পদ্ধতি (Tailwind v4)
+v4-এ কোনো @layer বা র্যাপার ছাড়াই সরাসরি @utility ব্যবহার করতে হবে:
+
+@utility hero-text-gradient {
+  @apply bg-linear-to-r from-orange-500 via-pink-500 to-purple-500 bg-clip-text text-transparent;
+}
+
+নোট: v4-এ bg-gradient-to-r পরিবর্তন হয়ে bg-linear-to-r হয়েছে)। 
+
+💡 কেন এই পরিবর্তন করা হলো?
+
+১. Tree-shaking (ফাইল সাইজ ছোট রাখা): পুরোনো @layer দিয়ে তৈরি করা কাস্টম ক্লাসগুলো অনেক সময় প্রজেক্টে ব্যবহার না করলেও ফাইনাল ফাইলে থেকে যেত। নতুন @utility ডিরেক্টিভ ব্যবহার করলে কোডটি যদি আপনার HTML/React ফাইলে ব্যবহার না করা হয়, তবে তা ফাইনাল বিল্ড থেকে স্বয়ংক্রিয়ভাবে বাদ পড়ে যায় (Tree-shaken)।
+
+২. Native CSS Layer Support: Tailwind v4 এখন ব্রাউজারের নিজস্ব Native CSS Cascade Layers ব্যবহার করে, যার ফলে পুরোনো কাস্টম লেয়ার ম্যানেজমেন্টের আর প্রয়োজন নেই।
+
+*/
+
+/* Yes, by default, if you want to declare completely independent custom utilities with separate names, you do have to write them one by one like this: 
+
+@utility utility-name1 { ... }
+@utility utility-name2 { ... }
+
+তবে আপনার গ্রেডিয়েন্ট রিকোয়ারমেন্টের জন্য এগুলোকে একসাথে কম্বাইন করার বা বারবার কোড না লেখার ২টি চমৎকার আধুনিক উপায় রয়েছে:
+
+💡 Option 1: The Native CSS Route (সবচেয়ে সেরা উপায়)যদি একই ধরনের ক্লাসের কাজ শুধু রঙ বা সামান্য কিছু পরিবর্তন করা হয়, তবে প্রতিবার আলাদা @utility ব্লক না লিখে standard CSS class ব্যবহার করে কাস্টম প্রপার্টি ডিক্লেয়ার করতে পারেন। Tailwind v4-এ @apply সরাসরি standard CSS ক্লাসেও কাজ করে: 
+
+// Multiple utilities defined together in a native, clean layout
+.hero-text-gradient,
+.technology-text-gradient {
+  @apply bg-clip-text text-transparent;
+}
+
+.hero-text-gradient {
+  @apply bg-linear-to-r from-orange via-secondary to-foreground;
+}
+
+.technology-text-gradient {
+  @apply bg-linear-to-r from-accent to-violet-light;
+}
+
+এতে আপনার টাইপিং অনেক কমে যাবে এবং কমন স্টাইলগুলো (bg-clip-text text-transparent) একবারেই কম্বাইন হয়ে যাবে।
+
+🌟 Option 2: Functional Utility (একটি ডায়নামিক ক্লাস)আপনি যদি আলাদা আলাদা নাম ব্যবহার করতে না চান, তবে Tailwind v4-এর Functional Utility (*) ফিচার ব্যবহার করে একটি মাত্র ডাইনামিক ইউটিলিটি ক্লাস বানাতে পারেন: 
+
+// This ONE utility block creates an infinite number of variations!
+@utility brand-text-* {
+  @apply bg-clip-text text-transparent bg-linear-to-r;
+  background-image: linear-gradient(to right, var(--color---value));
+}
+
+এটি তৈরি করলে আপনি আপনার HTML/React কোডে সরাসরি এভাবে ডাইনামিক ভ্যালু পাস করতে পারবেন:
+
+<h1 className="brand-text-orange">
+<p className="brand-text-purple-500">
+
+
+🎯 Tailwind-এর মূল ফিলোসফিTailwind টিম সাধারণত বড় বড় @utility বা কাস্টম সিএসএস ফাইল বানানো উত্সাহিত করে না। তারা রিকমেন্ড করে স্টাইলগুলোকে সরাসরি আপনার React Component-এর ভেতরেই রাখতে: 
+
+// src/components/GradientText.tsx
+interface Props {
+  variant: 'hero' | 'tech';
+  children: React.ReactNode;
+}
+
+export default function GradientText({ variant, children }: Props) {
+  const gradientClass = variant === 'hero' 
+    ? 'from-orange via-secondary to-foreground' 
+    : 'from-accent to-violet-light';
+
+  return (
+    <span className={`bg-linear-to-r bg-clip-text text-transparent ${gradientClass}`}>
+      {children}
+    </span>
+  );
+}
+
+*/
+
+/* আমি আপনাকে React Component বানিয়ে হ্যান্ডেল করার পদ্ধতিটি (React Native Approach) সবচেয়ে বেশি সাজেস্ট করব।
+
+এর কারণ হলো, Tailwind CSS-এর মূল উদ্দেশ্যই হচ্ছে আপনার সম্পূর্ণ স্টাইল যেন HTML/React ফাইলের ভেতরেই থাকে, যাতে আপনাকে বারবার সিএসএস ফাইলে গিয়ে কোড লিখতে না হয়। এছাড়া React Component ব্যবহার করলে TypeScript-এর পূর্ণ সুবিধা (Type Safety) পাওয়া যায়।
+
+নিচে আপনার প্রয়োজনীয় Reusable Gradient Component-এর কোডটি দেওয়া হলো:
+
+🛠️ আপনার জন্য সেরা সলিউশন (React Component)আপনার প্রজেক্টের src/components/GradientText.tsx ফাইলে এই কোডটি রাখুন:
+
+// src/components/GradientText.tsx
+import React from 'react';
+
+interface GradientTextProps {
+  children: React.ReactNode;
+  // এখানে ভ্যারিয়েন্ট ডিফাইন করা হলো, যাতে ভুল টাইপিং না হয়
+  variant?: 'hero' | 'technology'; 
+  className?: string; // অতিরিক্ত ক্লাসের জন্য (যেমন: text size)
+}
+
+export default function GradientText({ 
+  children, 
+  variant = 'hero', 
+  className = '' 
+}: GradientTextProps) {
+  
+  // ভ্যারিয়েন্ট অনুযায়ী কালার ক্লাস সিলেক্ট হবে
+  const gradientStyles = variant === 'hero'
+    ? 'from-orange via-secondary to-foreground'
+    : 'from-accent to-violet-light';
+
+  return (
+    <span 
+      className={`bg-linear-to-r bg-clip-text text-transparent ${gradientStyles} ${className}`}
+    >
+      {children}
+    </span>
+  );
+}
+
+💻 এখন আপনার পেইজে যেভাবে এটি ব্যবহার করবেন:
+
+// src/pages/Home.tsx
+import GradientText from '../components/GradientText';
+
+export default function Home() {
+  return (
+    <div className="p-10 space-y-6 bg-slate-900 min-h-screen text-white">
+      
+      // Hero Text Gradient
+      <h1 className="text-5xl font-extrabold tracking-tight">
+        Welcome to <GradientText variant="hero">Our Platform</GradientText>
+      </h1>
+
+      // Technology Text Gradient
+      <p className="text-2xl font-medium">
+        Built with the latest <GradientText variant="technology">Vite & Tailwind v4</GradientText>
+      </p>
+
+    </div>
+  );
+}
+
+🌟 কেন এই পদ্ধতিটি সেরা?
+
+No CSS clutter: আপনার index.css ফাইল একদম পরিষ্কার থাকবে, সেখানে কোনো কাস্টম @utility লিখতে হবে না।
+
+Highly Flexible: ভবিষ্যতে যদি ৩ নম্বর কোনো গ্রেডিয়েন্ট লাগে, আপনি শুধু variant === 'new-type' কন্ডিশন যোগ করে দিলেই হবে।
+
+Auto-completion (IntelliSense): কোড লেখার সময় IDE নিজেই আপনাকে সাজেস্ট করবে আপনি hero ব্যবহার করবেন নাকি technology।
+
+*/
+
+/*  
+In native CSS and Tailwind CSS v4, angles run clockwise, where 0deg points straight up, 90deg points to the right, and so on.
+
+Here is the complete reference map for all standard side-to-side and diagonal directions with their exact degree equivalents and native Tailwind keyword classes:
+
+🧭 1. Standard Side-to-Side Directions (Cardinal Directions)
+
+From → To Direction Exact CSS Degree Tailwind v4 Class
+
+Bottom → Top 0deg bg-linear-to-t
+Left → Right 90deg bg-linear-to-r
+Top → Bottom 180deg bg-linear-to-b
+Right → Left 270deg bg-linear-to-l
+
+📐 2. Standard Diagonal Directions (Corner to Corner)
+
+From → To Direction Exact CSS Degree Tailwind v4 Equivalent Class
+
+Bottom-Left → Top-Right 45deg bg-linear-to-tr
+Top-Left → Bottom-Right 135deg bg-linear-to-br
+Top-Right → Bottom-Left 225deg bg-linear-to-bl
+Bottom-Right → Top-Left 315deg bg-linear-to-tl
+
+*/

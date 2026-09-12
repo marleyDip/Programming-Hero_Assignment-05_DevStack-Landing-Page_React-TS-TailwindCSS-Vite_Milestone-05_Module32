@@ -1,1 +1,73 @@
 @import "tailwindcss";
+
+@theme {
+  /* Generates Colors for background, text, border */
+  --color-primary: #db2777; /* pink-600 - primary actions, links */
+  --color-secondary: #d81b7e; /* deep pink - secondary emphasis */
+  --color-accent: #ec4899; /* pink-500, highlights */
+  --color-foreground: #7c3aed; /* violet-600, pairs with the pink for contrast */
+  --color-violet-light: #8b5cf6; /* lighter violet, soft-gradient partner */
+  --color-orange: #ff5722; /* gradient start */
+
+  /* Text Colors
+    Generate text-* utilities */
+  --color-text-heading: #0f172a; /* slate-900 */
+  --color-text-body: #334155; /* slate-700 */
+  --color-text-secondary: #475569; /* slate-600 */
+  --color-text-muted: #64748b; /* slate-500 */
+  --color-text-faint: #94a3b8; /* slate-400 */
+  --color-text-danger: #d82c20;
+  --color-text-pink: #fbcfe8; /* pink-200 */
+
+  /* UI Colors */
+  --color-button: #d91b7e; /* deep pink - Auth button */
+  --color-surface-button: #0a0f1d;
+  --color-border-subtle: #f1f5f9;
+  --color-border-danger: #ed8c85;
+
+  /* Generate Shadow */
+  --shadow-pink-glow: 0 1px 2px 0 var(--color-text-pink);
+  --shadow-brand-soft: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+
+  /* Typography */
+  --font-jakarta: "Plus Jakarta Sans", sans-serif;
+
+  /* Generate Gradient Color - Obviously add --background-image-, without this not work  */
+  --background-image-gradient-brand: linear-gradient(
+    to top right,
+    var(--color-accent),
+    var(--color-foreground)
+  );
+
+  /* --background-image-gradient-brand: linear-gradient(
+    45deg,
+    var(--color-pink-500) 0%,
+    var(--color-violet-600) 100%
+  ); */
+}
+
+/* @utility hover-gradient-brand {
+  @apply bg-linear-45 from-pink-500 to-violet-600;
+} */
+
+body {
+  background-color: #ffffff;
+  background-image: none;
+}
+
+/* #root {
+  max-width: 1280px;
+  margin-inline: auto;
+} */
+
+/* for text: 
+linear-gradient color: 0% #ff5722 100%, 50% #d81b7e 100%, 100% #7c3aed 100%
+
+linear-gradient color: 0% #ec4899 100%, 100% #8b5cf6 100%  */
+
+/* "shadow-[0px_1px_2px_0px_#fbcfe8]
+
+shadow-xs shadow-pink-200
+
+shadow-xs => x=0 y=1px blur=2px spread=0
+*/
