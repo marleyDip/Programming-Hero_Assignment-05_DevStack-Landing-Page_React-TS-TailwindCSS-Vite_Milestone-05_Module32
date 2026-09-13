@@ -3,10 +3,11 @@
  * Owns the "Your Stack" state: Which technologies the visitor has picked.
  *
  * the add / remove / clear actions and their toast feedback.
+ * persists to localStorage so the stack survive a page refresh.
  *
  */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import type { Technology } from "../types/technology";
 
@@ -18,8 +19,34 @@ interface UseStackResult {
   isInStack: (id: string) => boolean;
 }
 
+const STORAGE_KEY = "your-stack";
+
+function loadStack(): Technology[] {
+  if (typeof window === "undefined") return [];
+
+  try {
+    const raw = window.localStorage.getItem(STORAGE_KEY);
+    if (!raw) return [];
+
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (err) {
+    console.log("Failed to load stack from localStorage:", err);
+    return [];
+  }
+}
+
 export function useStack(): UseStackResult {
-  const [stack, setStack] = useState<Technology[]>([]);
+  const [stack, setStack] = useState<Technology[]>(() => loadStack());
+
+  // Keep localStorage in sync whenever the stack changes
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(stack));
+    } catch (err) {
+      console.log("Failed to save stack to localStorage:", err);
+    }
+  }, [stack]);
 
   const isInStack = (id: string) => stack.some((item) => item.id === id);
 
