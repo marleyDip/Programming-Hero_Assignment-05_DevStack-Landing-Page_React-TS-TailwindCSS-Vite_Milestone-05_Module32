@@ -1,4 +1,6 @@
+import { useMemo } from "react";
 import type { Technology } from "../../types/technology";
+import { buildBadgeColorMap } from "../../utils/badgeColors";
 import TechnologyCard from "./TechnologyCard";
 
 interface TechnologyGridProps {
@@ -12,6 +14,11 @@ export default function TechnologyGrid({
   isInStack,
   onAdd,
 }: TechnologyGridProps) {
+  const badgeColorMap = useMemo(
+    () => buildBadgeColorMap(technologies.map((tech) => tech.id)),
+    [technologies],
+  );
+
   if (technologies.length === 0) {
     return (
       <p className="py-16 text-center text-sm text-slate-400">
@@ -28,6 +35,7 @@ export default function TechnologyGrid({
           technology={technology}
           isAdded={isInStack(technology.id)}
           onAdd={onAdd}
+          badgeStyle={badgeColorMap.get(technology.id) ?? ""}
         />
       ))}
     </div>

@@ -7,22 +7,22 @@ import TechnologyGrid from "./TechnologyGrid";
 
 export default function Technology() {
   const { technologies, isLoading, error } = useTechnologies();
-  console.log(technologies);
+  // console.log(technologies);
 
   const { stack, addToStack, removeFromStack, clearStack, isInStack } =
     useStack();
-  console.log(
-    "Total Stack",
-    stack,
-    "Add to Stack",
-    addToStack,
-    "Remove from Stack",
-    removeFromStack,
-    "Stack is clear",
-    clearStack,
-    "In Stack",
-    isInStack,
-  );
+  // console.log(
+  //   "Total Stack",
+  //   stack,
+  //   "Add to Stack",
+  //   addToStack,
+  //   "Remove from Stack",
+  //   removeFromStack,
+  //   "Stack is clear",
+  //   clearStack,
+  //   "In Stack",
+  //   isInStack,
+  // );
 
   return (
     <section

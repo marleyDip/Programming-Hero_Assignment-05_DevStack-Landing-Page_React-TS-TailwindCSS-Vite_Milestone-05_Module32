@@ -5,6 +5,7 @@ interface TechnologyCardProps {
   technology: Technology;
   isAdded: boolean;
   onAdd: (technology: Technology) => void;
+  badgeStyle: string;
 }
 
 const DIFFICULTY_STYLES: Record<Technology["difficulty"], string> = {
@@ -13,33 +14,11 @@ const DIFFICULTY_STYLES: Record<Technology["difficulty"], string> = {
   Advanced: "text-rose-600 border-rose-200 bg-rose-50",
 };
 
-const BADGE_COLOR_PALETTE: string[] = [
-  "text-primary border-primary/25 bg-primary/10",
-  "text-accent border-accent/25 bg-accent/10",
-  "text-foreground border-foreground/25 bg-foreground/10",
-  "text-emerald-600 border-emerald-200 bg-emerald-50",
-  "text-amber-600 border-amber-200 bg-amber-50",
-  "text-sky-600 border-sky-200 bg-sky-50",
-  "text-orange-600 border-orange-200 bg-orange-50",
-];
-
-function hashToIndex(seed: string, paletteLength: number): number {
-  let hash = 0;
-  for (let i = 0; i < seed.length; i++) {
-    hash = (hash << 5) - hash + seed.charCodeAt(i);
-    hash |= 0;
-  }
-  return Math.abs(hash) % paletteLength;
-}
-
-function getBadgeStyle(id: string): string {
-  return BADGE_COLOR_PALETTE[hashToIndex(id, BADGE_COLOR_PALETTE.length)];
-}
-
 export default function TechnologyCard({
   technology,
   isAdded,
   onAdd,
+  badgeStyle,
 }: TechnologyCardProps) {
   const { name, category, description, icon, rating, difficulty, badge } =
     technology;
@@ -63,7 +42,7 @@ export default function TechnologyCard({
         </div>
 
         <span
-          className={`rounded-full border px-2.5 py-0.5 text-xs font-semibold ${getBadgeStyle(technology.id)}`}
+          className={`rounded-full border px-2.5 py-0.5 text-xs font-semibold ${badgeStyle}`}
         >
           {badge}
         </span>
