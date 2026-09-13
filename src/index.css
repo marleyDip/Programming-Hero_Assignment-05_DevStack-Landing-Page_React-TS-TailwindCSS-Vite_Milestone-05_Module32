@@ -73,20 +73,3 @@ body {
 .technology-text-gradient {
   @apply bg-linear-to-r from-accent to-violet-light;
 } */
-
-/* #root {
-  max-width: 1280px;
-  margin-inline: auto;
-} */
-
-/* for text: 
-linear-gradient color: 0% #ff5722 100%, 50% #d81b7e 100%, 100% #7c3aed 100%
-
-linear-gradient color: 0% #ec4899 100%, 100% #8b5cf6 100%  */
-
-/* "shadow-[0px_1px_2px_0px_#fbcfe8]
-
-shadow-xs shadow-pink-200
-
-shadow-xs => x=0 y=1px blur=2px spread=0
-*/

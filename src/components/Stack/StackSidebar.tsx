@@ -1,64 +1,3 @@
-/* import type { Technology } from "../../types/technology";
-import StackItem from "./StackItem";
-
-interface StackSidebarProps {
-  stack: Technology[];
-  onRemove: (id: string) => void;
-  onClear: () => void;
-}
-
-export default function StackSidebar({
-  stack,
-  onRemove,
-  onClear,
-}: StackSidebarProps) {
-  const count = stack.length;
-
-  return (
-    <aside className="bg-white border-2 border-border-subtle p-5 rounded-2xl shadow-brand-soft">
-      <div className="font-jakarta flex flex-col justify-between">
-        <h2 className="pb-1 text-base/normal font-bold text-text-heading">
-          Your Stack
-        </h2>
-
-        <span className="pb-3 text-xs/[1.33] text-text-faint">
-          {count} Technology Selected
-        </span>
-
-        {count === 0 ? (
-          <div className="py-10 text-center">
-            <p className="text-sm text-slate-500 border-2 px-4 py-2.5 border-dashed border-slate-200">
-              Nothing here yet. Add a technology from the list to start building
-              your stack.
-            </p>
-          </div>
-        ) : (
-          <>
-            <ul className="flex flex-col gap-2">
-              {stack.map((technology) => (
-                <StackItem
-                  key={technology.id}
-                  technology={technology}
-                  onRemove={onRemove}
-                />
-              ))}
-            </ul>
-
-            <button
-              type="button"
-              onClick={onClear}
-              className="mt-4 font-inter text-sm/[1.14] text-text-danger font-semibold w-full px-4 py-2.5 rounded-lg bg-white border-2 border-border-danger transition-colors hover:border-rose-400/40 hover:text-rose-300"
-            >
-              Remove All
-            </button>
-          </>
-        )}
-      </div>
-    </aside>
-  );
-}
- */
-
 import { Trash2 } from "lucide-react";
 import type { Technology } from "../../types/technology";
 import StackItem from "./StackItem";
@@ -81,7 +20,9 @@ export default function StackSidebar({
       <div className="flex flex-col justify-between gap-1 pb-4">
         <h2 className="text-base font-bold text-text-heading">Your Stack</h2>
         <span className="text-xs text-text-faint">
-          {count} {count === 1 ? "Technology" : "Technologies"} Selected
+          {count === 0
+            ? "No technologies selected yet."
+            : `${count} ${count === 1 ? "Technology" : "Technologies"} Selected`}
         </span>
       </div>
 
