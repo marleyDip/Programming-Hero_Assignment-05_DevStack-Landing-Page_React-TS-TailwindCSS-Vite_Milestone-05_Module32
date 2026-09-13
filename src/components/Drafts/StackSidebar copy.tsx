@@ -61,7 +61,7 @@ export default function StackSidebar({
 
 import { Trash2 } from "lucide-react";
 import type { Technology } from "../../types/technology";
-import StackItem from "./StackItem";
+import StackItem from "../Stack/StackItem";
 
 interface StackSidebarProps {
   stack: Technology[];
@@ -78,10 +78,10 @@ export default function StackSidebar({
 
   return (
     <aside className="rounded-2xl border border-border-subtle bg-white p-5 shadow-brand-soft font-jakarta">
-      <div className="flex flex-col justify-between gap-1 pb-4">
+      <div className="flex items-center justify-between gap-3 pb-4">
         <h2 className="text-base font-bold text-text-heading">Your Stack</h2>
-        <span className="text-xs text-text-faint">
-          {count} {count === 1 ? "Technology" : "Technologies"} Selected
+        <span className="rounded-full bg-accent/10 px-2.5 py-1 text-xs font-semibold text-primary">
+          {count} {count === 1 ? "Technology" : "Technologies"}
         </span>
       </div>
 

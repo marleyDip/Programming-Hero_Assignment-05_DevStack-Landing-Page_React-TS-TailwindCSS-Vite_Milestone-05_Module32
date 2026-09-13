@@ -10,8 +10,8 @@ const mobileGradient =
   "from-[#ff5722] from-15% via-[#e91e63] via-55% to-[#9c27b0] to-90%";
 
 const desktopGradient = {
-  hero: "md:from-orange md:via-secondary md:to-foreground",
-  technology: "md:from-accent md:to-violet-light",
+  hero: "md:from-orange md:from-0% md:via-secondary md:via-50% md:to-foreground md:to-100%",
+  technology: "md:from-accent md:from-100% md:to-violet-light md:to-100%",
 } as const;
 
 export default function GradientText({

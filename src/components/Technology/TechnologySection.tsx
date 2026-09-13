@@ -30,19 +30,19 @@ export default function Technology() {
       className="mx-auto max-w-7xl mt-28 px-5 sm:px-6 lg:px-8 pb-32"
     >
       {/* Heading */}
-      <div className="max-w-xl">
-        <h2 className="font-inter text-4xl/[1.11] font-extrabold tracking-[-0.9] text-text-heading">
+      <div className="max-w-xl text-center md:text-left">
+        <h2 className="font-inter text-2xl/[1.33] md:text-4xl/[1.11] font-bold md:font-extrabold tracking-[-0.6] md:tracking-[-0.9] text-[#111827] md:text-text-heading">
           Explore the{" "}
           <GradientText variant="technology">Technologies</GradientText>
         </h2>
 
-        <p className="pt-2 font-jakarta text-text-muted text-base/normal">
+        <p className="pt-1 md:pt-2 font-inter md:font-jakarta text-[#6b7280] md:text-text-muted text-xs/[1.33] md:text-base/normal">
           Pick one technology per category to build your ideal stack.
         </p>
       </div>
 
       {/* Technology Card and SideBar */}
-      <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-[1fr_280px] md:items-start">
+      <div className="mt-5 md:mt-10 grid grid-cols-1 gap-5 md:gap-8 md:grid-cols-[1fr_280px] md:items-start">
         {/* Technology Card */}
         <div className="order-2  md:order-1">
           {isLoading && <Loader />}
@@ -65,7 +65,7 @@ export default function Technology() {
         </div>
 
         {/* SideBar */}
-        <div className="order-1 md:order-2 md:sticky md:top-6 md:self-start">
+        <div className="order-1 md:order-2 md:sticky md:top-30 md:self-start">
           <StackSidebar
             stack={stack}
             onRemove={removeFromStack}
