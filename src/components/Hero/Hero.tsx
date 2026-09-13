@@ -6,7 +6,7 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 pt-10 pb-12 md:pb-16 sm:pt-20 lg:pt-24"
+      className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 pt-10 sm:pt-20 lg:pt-24"
     >
       <div className="grid items-center gap-3 md:gap-8 md:grid-cols-2">
         {/* Info */}

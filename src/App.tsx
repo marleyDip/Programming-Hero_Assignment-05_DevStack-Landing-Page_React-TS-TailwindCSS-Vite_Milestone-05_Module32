@@ -1,5 +1,7 @@
+import Footer from "./components/Footer/Footer";
 import Hero from "./components/Hero/Hero";
 import Navbar from "./components/Navbar/Navbar";
+import Technology from "./components/Technology/TechnologySection";
 
 function App() {
   // const notify = () => toast("Wow so easy!");
@@ -10,6 +12,8 @@ function App() {
 
       <Navbar />
       <Hero />
+      <Technology />
+      <Footer />
     </div>
   );
 }
