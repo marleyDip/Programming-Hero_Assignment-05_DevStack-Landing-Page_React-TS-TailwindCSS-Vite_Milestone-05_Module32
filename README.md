@@ -16,20 +16,29 @@ click removal, and toast feedback along the way.
 
 ## ✨ Features
 
-1. **A single-source gradient theme.** The orange → pink → violet brand
-   gradient is defined once, as a CSS custom property
-   (`--gradient-brand` in `src/index.css`), and reused for the brand
-   name, hero heading highlight, and every primary button — so the whole
-   app can be re-themed by editing one value.
-2. **A real add-to-stack workflow, not just a toggle.** Adding a
-   technology disables its card button (`✓ Added to Stack`), updates a
-   live count in the sidebar, and blocks duplicate adds with a warning
-   toast — while removal works either one item at a time or all at once.
-3. **Fully responsive layout with no hardcoded data.** The technology
-   catalogue loads from a local JSON file at runtime (via `fetch` inside
-   a `useEffect`), and the grid reflows from 3 columns on desktop to 2 on
-   tablet to 1 on mobile, with a dedicated hamburger navbar layout below
-   the `md` breakpoint.
+### 1. 🔍 Explore Technologies
+
+Browse different development technologies with useful information such as:
+
+- Technology name
+- Category
+- Description
+- Difficulty level
+- Rating
+- Technology badge
+
+### 2. 📦 Build Your Personal Stack
+
+Add your favorite technologies to the **Your Stack** section. You can also:
+
+- Prevent duplicate technologies
+- Remove individual technologies
+- Clear the entire stack
+- View the total number of selected technologies
+
+### 3. 📱 Responsive and Interactive Design
+
+Enjoy a clean and responsive interface across desktop, tablet, and mobile devices, with interactive buttons, loading states, error handling, and toast notifications.
 
 ## 📁 Project Structure
 
