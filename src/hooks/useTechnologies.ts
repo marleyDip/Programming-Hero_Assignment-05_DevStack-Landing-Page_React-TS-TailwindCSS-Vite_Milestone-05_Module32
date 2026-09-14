@@ -17,7 +17,7 @@ export function useTechnologies(): UseTechnologiesResult {
 
     const loadTechnologies = async () => {
       try {
-        const response = await fetch("/public/data/technologies.json", {
+        const response = await fetch("/data/technologies.json", {
           signal: controller.signal,
         });
 
