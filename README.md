@@ -59,76 +59,144 @@ npm run preview   # preview the production build
 
 ---
 
-## 📝 React Questions
+## 📝 React Questions and Answers
 
-**What is JSX, and why is it used in React?**
-JSX is a syntax extension that lets you write HTML-like markup directly
-inside JavaScript/TypeScript files. Under the hood it compiles down to
-plain `React.createElement(...)` calls. It's used because it lets you
-describe what a piece of UI should look like right next to the logic
-that drives it, instead of juggling separate template files — which
-makes components easier to read and reason about.
+### 1. What is JSX, and why is it used in React?
 
-**What is the difference between props and state?**
-Props are data passed *into* a component from its parent — a component
-can't change its own props, only read them. State is data a component
-owns and manages *itself*, and can update over time (usually via
-`useState`). In this project, a `Technology` object passed into
-`TechnologyCard` is a prop; the `stack` array living in `useStack` is
-state, because it changes as the user adds and removes items.
+JSX stands for JavaScript XML. It allows us to write HTML-like syntax or code inside JavaScript/TypeScript.
 
-**What does the `useState` hook do, and where did you use it in this project?**
-`useState` gives a component a piece of memory that persists between
-re-renders, plus a setter function that triggers a re-render when the
-value changes. It's used in `useStack.ts` to hold the `stack` array (the
-technologies the user has selected), in `useTechnologies.ts` to hold the
-fetched catalogue plus loading/error flags, and in `Navbar.tsx` to track
-whether the mobile menu is open.
+React uses JSX to describe the structure of the user interface in a readable way. It makes components easier to read and write.
 
-**What does the `useEffect` hook do, and why did you need it to load the JSON data?**
-`useEffect` runs a side effect after a component renders — things like
-data fetching, subscriptions, or manually touching the DOM, which don't
-belong in the render logic itself. Fetching `technologies.json` is a side
-effect (it talks to the network), so it's wrapped in `useEffect` inside
-`useTechnologies.ts` with an empty dependency array, meaning it runs once
-when the app first mounts, sets `isLoading` to `false` once the data (or
-an error) comes back, and cleans up an `isMounted` flag so it doesn't try
-to update state if the component unmounts mid-fetch.
+``` tsx
+function Welcome() {
+  return <h1>Welcome to DevStack</h1>;
+}
+```
 
-**Why does every item in a `.map()` list need a unique `key` prop?**
-React uses the `key` to match each rendered element to the same
-underlying item across re-renders, so it can update, reorder, or remove
-the right DOM node instead of re-creating the whole list from scratch.
-Without stable keys, React can mix up which item is which — for example
-when a technology is removed from the stack, and the list re-renders. In
-this project, `technology.id` is used as the key for both the technology
-grid and the stack list, since it uniquely and stably identifies each
-item.
+### 2. What is the difference between props and state?
 
-**What is conditional rendering? Show one place you used it (example: the empty stack message).**
-Conditional rendering means showing different UI depending on some piece
-of state, using normal JavaScript conditionals (ternaries, `&&`, early
-returns) inside JSX. `StackSidebar.tsx` does this for the empty state:
+| **Props** | **State** |
+|---|---|
+| Props are data passed from a parent component to a child component. | State is data managed inside a component or custom hook. |
+| Props are read-only. | State can be updated. |
+| Props help make components reusable. | State helps make the UI interactive and dynamic. |
 
-```tsx
-{count === 0 ? (
-  <p>Nothing here yet. Add a technology from the list to start building your stack.</p>
+``` tsx
+<TechnologyCard technology={technology} />
+```
+
+In this project,
+
+- [x] A `Technology` object passed into `TechnologyCard` is a prop; the `stack` array living in `useStack` is state, because it changes as the user adds and removes items.
+
+### 3. What does the `useState` hook do, and where did you use it in this project?
+
+The `useState` hook allows a functional component to store and update data. When the state changes, React re-renders the component.
+
+In our project, we used it in useStack() custom hook to manage the selected technologies:
+
+``` tsx
+const [stack, setStack] = useState<Technology[]>(() => loadStack());
+```
+
+- `stack` is a state variable that stores selected technologies (current state value).
+- The `loadStack` function is a initial state value. The initial value was only used when the state was initialized.
+- When component mounts, function calls and it's return value is the initial state value and show only first time when open in browser.
+- `setStack` is a state updater function to updates the stack.
+- The UI updates whenever the stack changes.
+
+- [x] We also used state in the navbar to control whether the mobile menu is open or closed.
+
+### 4. What does the `useEffect` hook do, and why did you need it to load the JSON data?
+
+The `useEffect` hook runs side-effect code after a component renders. It is commonly used for data fetching, subscriptions, and interacting with external systems.
+
+In this project, it was used inside `useTechnologies` to fetch data from the local JSON file after the component mounted.
+
+``` tsx
+useEffect(() => {
+  fetch("/data/technologies.json")
+    .then((response) => response.json())
+    .then((data) => setTechnologies(data));
+}, []);
+```
+
+- [x] We needed it because fetching JSON data is an operation outside the normal rendering process.
+- [x] The empty dependency array means the effect runs after the initial render.
+
+### 5. Why does every item in a `.map()` list need a unique `key` prop?
+
+React uses the `key` prop to identify individual list items. It helps React understand which items were added, removed, or updated.
+
+``` tsx
+{technologies.map((technology) => (
+  <TechnologyCard
+    key={technology.id}
+    technology={technology}
+  />
+))}
+```
+
+- [x] when a technology is removed from the stack, and the list re-renders.
+- [x] Here, `technology.id` is used as the key for both the technology grid and the stack list, since it uniquely and stably identifies each item..
+- [x] A stable and unique key helps React update the list efficiently and correctly.
+
+### 6. What is conditional rendering? Show one place you used it.
+
+Conditional rendering means displaying different UI elements based on a condition. 
+
+In this project, an empty-stack message is displayed when no
+technology has been selected:
+
+``` tsx
+{stack.length === 0 ? (
+  <p>Your stack is empty. Add technologies to get started.</p>
 ) : (
-  <ul>{/* ...stack items... */}</ul>
+  <StackItemList stack={stack} />
 )}
 ```
 
-`App.tsx` does the same thing for the catalogue itself, choosing between
-a loading spinner, an error message, or the technology grid depending on
-the current fetch state.
+- [x] If stack.length === 0, React displays the empty message. Otherwise, it displays the selected technologies.
 
-**How do you pass data from a parent component to a child component, and how does a child send something back to the parent?**
-A parent passes data down by writing it as a JSX attribute, which the
-child receives as a prop — e.g. `App.tsx` passes `technology` and
-`isAdded` into `TechnologyCard`. To send something back *up*, the parent
-passes a callback function down as a prop, and the child calls that
-function (usually with some data as an argument) when something
-happens. In this project, `App.tsx` passes `addToStack` down into
-`TechnologyGrid` and then into `TechnologyCard` as the `onAdd` prop; when
-its button is clicked, the card calls `onAdd(technology)`, which runs
-the parent's state update.
+### 7. How do you pass data from a parent component to a child component, and how does a child send something back to the parent?
+
+A parent passes data to a child through props:
+
+``` tsx
+<TechnologyGrid
+  technologies={technologies}
+  isInStack={isInStack}
+  onAdd={addToStack}
+/>
+```
+
+- [x] Here, Technology.tsx passes data and functions to TechnologyGrid.
+
+A child can communicate with its parent by calling a function (usually with some data as an argument) received through props.
+
+``` tsx
+function TechnologyCard({ technology, onAdd }) {
+  return (
+    <button onClick={() => onAdd(technology)}>
+      Add to Stack
+    </button>
+  );
+}
+```
+
+- [x] The child does not directly change the parent's state.
+- [x] Instead, it calls the parent's function, and the parent updates the shared state.
+
+In this project,
+
+- `Technology.tsx` manages the shared stack logic and
+passes data and handler functions to `TechnologyGrid` and
+`StackSidebar`.
+- `TechnologyGrid` displays the technologies.
+- `TechnologyCard` calls onAdd() when the user clicks the button.
+- `StackSidebar` receives the stack and displays selected technologies.
+
+## Project Purpose
+
+This project practices React concepts such as JSX, components, props,
+state, hooks, conditional rendering, list rendering, data fetching, and lifting state up.
